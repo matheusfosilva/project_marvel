@@ -9,6 +9,7 @@ const DefaultLocation = { lat: -7.220086, lng: -39.3281503 };
 
 function App() {
 
+
   //const [input, setInput ] = useState(0);
   const [comics, setComics] = useState([]);
   const [visible, setVisible] = useState(false);
@@ -97,15 +98,18 @@ function App() {
   }, [search]);
 
   return (
-    <div className="App">
+    <div className="App" >
 
-      <Container className='container'>
-        <Form>
-          <Form.Control value={search} type="text" placeholder="Search a comic" onChange={(text) => setSearch(text.target.value)} />
-        </Form>
-      </Container>
-
-      <Container>
+       <div style={{display:'flex',backgroundColor:'black' }}>
+         <Container className='container'>
+          <Form>
+            <Form.Control value={search} type="text" placeholder="Search a comic" onChange={(text) => setSearch(text.target.value)} />
+          </Form>
+        </Container>
+       </div>
+        
+          
+        <Container>
 
         {selectComics?.length > 0 && (
           <div>
@@ -140,8 +144,8 @@ function App() {
             <Button variant="primary" onClick={showMap}>Send-me</Button>
 
             <Modal show={sendMessage}>
-              <Alert variant="success" style={{margin:'0px'}}>
-                <Alert.Heading style={{textAlign:'center'}}>Comics will send soon!</Alert.Heading>
+              <Alert variant="success" style={{ margin: '0px' }}>
+                <Alert.Heading style={{ textAlign: 'center' }}>Comics will send soon!</Alert.Heading>
                 <hr />
                 <div className="d-flex justify-content-end">
                   <Button onClick={toggleSendMessage} variant="outline-success">
@@ -193,22 +197,22 @@ function App() {
         {comics?.map((comic) => {
           return (
 
-            <Card style={{ width: '18rem', margin: '20px', }}>
+            <Card style={{ width: '18rem', margin: '20px', backgroundColor:'red', color:'white' }}>
               <Card.Img variant="top" src={comic.thumbnail.path + '.' + comic.thumbnail.extension} />
-              <Card.Body>
-                <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
-                  <Card.Title style={{ flex: 1 }}>{comic.title}</Card.Title>
-                  <div style={{ display: 'flex', justifyContent: 'space-around' }} >
-                    <Button variant="outline-info" onClick={() => showModal(comic)}> Details </Button>
+              <Card.Body  >
+                <div >
+                  <Card.Title >{comic.title}</Card.Title>
+                  <div style={{display:'flex', justifyContent:'space-around'}} >
+                    <Button variant="outline-light" onClick={() => showModal(comic)}> Details </Button>
 
                     {
                       selectComics.find(element => element.id == comic.id) ?
-                        <Button variant="outline-danger" onClick={() => {
+                        <Button variant="outline-light" onClick={() => {
                           setSelectComics(selectComics.filter(elemento => {
                             return elemento.id != comic.id
                           }))
                         }} >Remove</Button>
-                        : <Button variant="outline-success" onClick={() => setSelectComics(selectComics.concat(comic))}>Add</Button>
+                        : <Button variant="outline-light" onClick={() => setSelectComics(selectComics.concat(comic))}>Add</Button>
 
                     }
                   </div>
@@ -221,17 +225,17 @@ function App() {
 
         {comicModal && (
 
-          <Modal show={visible}>
-            <Modal.Header >
+          <Modal show={visible} >
+            <Modal.Header  >
               <Modal.Title>{comicModal.title}</Modal.Title>
             </Modal.Header>
 
-            <Modal.Body>
+            <Modal.Body  >
               <p>{comicModal.description?.length === 0 || comicModal.description?.length == null ? 'No description' : comicModal.description}</p>
             </Modal.Body>
 
-            <Modal.Footer >
-              <Button variant="primary" onClick={hideModal} >Voltar</Button>
+            <Modal.Footer   >
+              <Button variant="outline-danger" onClick={hideModal} >back</Button>
             </Modal.Footer>
           </Modal>
         )}
