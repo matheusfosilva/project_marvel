@@ -29,7 +29,7 @@ function App() {
   async function getComics() {
 
     try {
-      const response = await axios.get(`http://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${md5}&limit=10`);
+      const response = await axios.get(`http://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${md5}&limit=40`);
       setComics(response.data.data.results)
       console.log(response.data.data.results);
     } catch (error) {
