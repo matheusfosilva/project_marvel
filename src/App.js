@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MapPicker from 'react-google-map-picker';
-import Pagination from 'react-bootstrap/Pagination';
 
 const DefaultLocation = { lat: -7.220086, lng: -39.3281503 };
 
@@ -21,8 +20,7 @@ function App() {
   const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
   const [location, setLocation] = useState(defaultLocation)
   const [sendMessage, setSendMessage] = useState(false)
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(null);
+ 
 
   const timeStamp = '1641319856';
   const apiKey = '2690be4165b30b415ca788849e00c3dd';
@@ -31,9 +29,8 @@ function App() {
   async function getComics() {
 
     try {
-      const response = await axios.get(`http://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${md5}&limit=20`);
+      const response = await axios.get(`http://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${md5}&limit=10`);
       setComics(response.data.data.results)
-      setTotal(response.data.data.total)
       console.log(response.data.data.results);
     } catch (error) {
       console.error(error);
@@ -84,10 +81,9 @@ function App() {
     setVisibleMap(false);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getComics()
-    console.log(page)
-  },[page]);
+  }, []);
 
   useEffect(() => {
     getComics()
@@ -107,7 +103,7 @@ function App() {
       <div style={{ display: 'flex', backgroundColor: 'black' }}>
         <Container className='container'>
           <Form>
-            <Form.Control value={search} type="text" placeholder="Search a comic" onChange={(text) => setSearch(text.target.value)} />
+            <Form.Control data-testid="search" value={search} type="text" placeholder="Search a comic" onChange={(text) => setSearch(text.target.value)} />
           </Form>
         </Container>
       </div>
@@ -188,7 +184,7 @@ function App() {
       </Container >
 
 
-      <Container style={
+      <Container data-testid="cartao" style={
 
         {
           display: 'flex',
@@ -251,30 +247,6 @@ function App() {
         )}
 
       </Container>
-
-      {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button variant="outline-secondary" >load more comics</Button>
-      </div> */}
-
-      {comics.length > 0 && (
-
-        <Pagination style={{ display: 'flex', justifyContent: "center" }}>
-          <Pagination.First onClick={() => setPage(0)}/>
-         { page > 0 && <Pagination.Prev onClick={ () => setPage(page--) }/>}
-          { page > 2 &&  <Pagination.Ellipsis />
-}
-          {page > 2 && <Pagination.Item onClick={() =>setPage(page-2)} >{page-2}</Pagination.Item>}
-          {page > 1 && <Pagination.Item onClick={() => setPage(page-1)} >{page-1}</Pagination.Item>}
-          <Pagination.Item onClick={() => setPage(page)} >{page}</Pagination.Item>
-          <Pagination.Item onClick={() => setPage(page+1)} >{page+1}</Pagination.Item>
-          <Pagination.Item onClick={() => setPage(page+2)} >{page+2}</Pagination.Item>
-
-          <Pagination.Ellipsis />
-          <Pagination.Next onClick={ () => setPage(page++) }/>
-          { (total / 20) > 5 && <Pagination.Last />}
-        </Pagination>)
-      }
-
 
     </div >
   );

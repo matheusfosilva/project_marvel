@@ -1,8 +1,27 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+
+  test('must show input from search on the top of screen', () => {
+    render(<App />);
+    const inputSearch = screen.getByTestId('search')
+    expect(inputSearch).toBeInTheDocument();
+
+  })
+
+
+  test('must show cards on page ', () => {
+    render(<App />);
+    const cardElement = screen.getByTestId('cartao')
+    expect(cardElement).toBeInTheDocument();
+  })
+
+
+
+
+
+
+
+
+
+
