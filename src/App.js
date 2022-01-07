@@ -9,7 +9,6 @@ const DefaultLocation = { lat: -7.220086, lng: -39.3281503 };
 
 function App() {
 
-
   //const [input, setInput ] = useState(0);
   const [comics, setComics] = useState([]);
   const [visible, setVisible] = useState(false);
@@ -37,6 +36,8 @@ function App() {
     }
 
   }
+
+
 
   async function searchComics() {
 
@@ -81,6 +82,7 @@ function App() {
     setVisibleMap(false);
   }
 
+
   useEffect(() => {
     console.log(selectComics)
   }, [selectComics]);
@@ -100,16 +102,16 @@ function App() {
   return (
     <div className="App" >
 
-       <div style={{display:'flex',backgroundColor:'black' }}>
-         <Container className='container'>
+      <div style={{ display: 'flex', backgroundColor: 'black' }}>
+        <Container className='container'>
           <Form>
             <Form.Control value={search} type="text" placeholder="Search a comic" onChange={(text) => setSearch(text.target.value)} />
           </Form>
         </Container>
-       </div>
-        
-          
-        <Container>
+      </div>
+
+
+      <Container>
 
         {selectComics?.length > 0 && (
           <div>
@@ -117,8 +119,8 @@ function App() {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Imagem</th>
-                  <th>Nome do quadrinho</th>
+                  <th>Image</th>
+                  <th>Comic title</th>
                 </tr>
               </thead>
               <tbody>
@@ -143,9 +145,9 @@ function App() {
 
             <Button variant="primary" onClick={showMap}>Send-me</Button>
 
-            <Modal show={sendMessage}>
+            <Modal show={sendMessage} >
               <Alert variant="success" style={{ margin: '0px' }}>
-                <Alert.Heading style={{ textAlign: 'center' }}>Comics will send soon!</Alert.Heading>
+                <Alert.Heading style={{ textAlign: 'center' }} >Comics will send soon!</Alert.Heading>
                 <hr />
                 <div className="d-flex justify-content-end">
                   <Button onClick={toggleSendMessage} variant="outline-success">
@@ -197,12 +199,15 @@ function App() {
         {comics?.map((comic) => {
           return (
 
-            <Card style={{ width: '18rem', margin: '20px', backgroundColor:'red', color:'white' }}>
+            <Card style={{ width: '18rem', margin: '20px', backgroundColor: 'red', color: 'white' }}>
               <Card.Img variant="top" src={comic.thumbnail.path + '.' + comic.thumbnail.extension} />
               <Card.Body  >
-                <div >
-                  <Card.Title >{comic.title}</Card.Title>
-                  <div style={{display:'flex', justifyContent:'space-around'}} >
+
+                <div  >
+
+                  <Card.Title  >{comic.title}</Card.Title>
+
+                  <div style={{ display: "flex", justifyContent: "space-around" }}  >
                     <Button variant="outline-light" onClick={() => showModal(comic)}> Details </Button>
 
                     {
@@ -212,11 +217,14 @@ function App() {
                             return elemento.id != comic.id
                           }))
                         }} >Remove</Button>
-                        : <Button variant="outline-light" onClick={() => setSelectComics(selectComics.concat(comic))}>Add</Button>
+                        : <Button variant="outline-light" onClick={() =>
+                          setSelectComics(selectComics.concat(comic))}>Add</Button>
 
                     }
+
                   </div>
                 </div>
+
               </Card.Body>
             </Card>
 
@@ -230,7 +238,7 @@ function App() {
               <Modal.Title>{comicModal.title}</Modal.Title>
             </Modal.Header>
 
-            <Modal.Body  >
+            <Modal.Body >
               <p>{comicModal.description?.length === 0 || comicModal.description?.length == null ? 'No description' : comicModal.description}</p>
             </Modal.Body>
 
@@ -241,6 +249,11 @@ function App() {
         )}
 
       </Container>
+
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button variant="outline-secondary" >load more comics</Button>
+      </div>
+
 
 
     </div >
