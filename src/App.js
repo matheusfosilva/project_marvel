@@ -25,7 +25,7 @@ function App() {
   // Variáveis utilizadas para configurar string de request à api 
 
   const timeStamp = '1641319856';
-  const apiKey = '2690be4165b30b415ca788849e00c3dd';
+  const apiKey = process.env.REACT_APP_APIKey;
   const md5 = 'b94d9effe9952c56847c56eba20cb753';
   
 
