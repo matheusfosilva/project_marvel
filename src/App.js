@@ -32,7 +32,7 @@ function App() {
   async function getComics() { // função de request da api 
 
     try { // função implementada para o tratamento de erros
-      const response = await axios.get(`http://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${md5}&limit=40`); // string de request da api 
+      const response = await axios.get(`https://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${md5}&limit=40`); // string de request da api 
       setComics(response.data.data.results) // encapsulamento do response
       console.log(response.data.data.results);
     } catch (error) {
@@ -44,7 +44,7 @@ function App() {
   async function searchComics() { // função de busca de quadrinhos semelhante à função de request com o parametro de tittle adicional na string de request
 
     try {
-      const response = await axios.get(`http://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${md5}&title=${search}&limit=40`);
+      const response = await axios.get(`https://gateway.marvel.com/v1/public/comics?ts=${timeStamp}&apikey=${apiKey}&hash=${md5}&title=${search}&limit=40`);
       setComics(response.data.data.results)
       console.log(response.data.data.results);
     } catch (error) {
