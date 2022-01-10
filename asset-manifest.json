@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/project_marvel/static/css/main.56e6221f.css",
-    "main.js": "/project_marvel/static/js/main.79d8b80c.js",
+    "main.js": "/project_marvel/static/js/main.d2b1977e.js",
     "static/js/787.cfd8f164.chunk.js": "/project_marvel/static/js/787.cfd8f164.chunk.js",
     "index.html": "/project_marvel/index.html",
     "main.56e6221f.css.map": "/project_marvel/static/css/main.56e6221f.css.map",
-    "main.79d8b80c.js.map": "/project_marvel/static/js/main.79d8b80c.js.map",
+    "main.d2b1977e.js.map": "/project_marvel/static/js/main.d2b1977e.js.map",
     "787.cfd8f164.chunk.js.map": "/project_marvel/static/js/787.cfd8f164.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.56e6221f.css",
-    "static/js/main.79d8b80c.js"
+    "static/js/main.d2b1977e.js"
   ]
 }
